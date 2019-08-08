@@ -8,11 +8,22 @@ import fr.opensagres.xdocreport.itext.extension.font.ITextFontRegistry;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
 import java.awt.*;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 public class DocxToPDFConverter extends Converter {
 
+    public static void main(String[] args) {
+          try {
+            FileInputStream fileInputStream = new FileInputStream("F:\\部署文档.docx");
+            FileOutputStream fileOutputStream = new FileOutputStream("F:\\部署文档_docx.pdf");
+            DocxToPDFConverter docxToPDFConverter = new DocxToPDFConverter(fileInputStream,fileOutputStream,true,true);
+            docxToPDFConverter.convert();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
     public DocxToPDFConverter(InputStream inStream, OutputStream outStream, boolean showMessages, boolean closeStreamsWhenComplete) {
         super(inStream, outStream, showMessages, closeStreamsWhenComplete);
@@ -21,10 +32,7 @@ public class DocxToPDFConverter extends Converter {
     @Override
     public void convert() throws Exception {
         loading();
-
-
         XWPFDocument document = new XWPFDocument(inStream);
-
         PdfOptions options = PdfOptions.create();
 //		options.fontEncoding("宋体");
 		/*options.fontProvider(new IFontProvider() {
@@ -60,12 +68,10 @@ public class DocxToPDFConverter extends Converter {
                 }
             }
         });
-
         processing();
         PdfConverter.getInstance().convert(document, outStream, options);
-
         finished();
-
     }
+
 
 }
