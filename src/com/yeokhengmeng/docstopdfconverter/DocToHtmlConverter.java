@@ -1,11 +1,10 @@
 package com.yeokhengmeng.docstopdfconverter;
 
-import fr.opensagres.poi.xwpf.converter.core.IXWPFConverter;
 import fr.opensagres.poi.xwpf.converter.core.ImageManager;
 import fr.opensagres.poi.xwpf.converter.xhtml.XHTMLConverter;
 import fr.opensagres.poi.xwpf.converter.xhtml.XHTMLOptions;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.converter.PicturesManager;
 import org.apache.poi.hwpf.converter.WordToHtmlConverter;
@@ -23,7 +22,7 @@ import java.io.*;
 public class DocToHtmlConverter {
 
     public static void main(String[] args) {
-        officeToHtml("F://部署文档.docx");
+        officeToHtml("F://部署文档.doc");
     }
 
     /**

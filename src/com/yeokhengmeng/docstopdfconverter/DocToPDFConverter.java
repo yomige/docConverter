@@ -1,17 +1,15 @@
 package com.yeokhengmeng.docstopdfconverter;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintStream;
-import java.net.URL;
-
 import org.docx4j.Docx4J;
-import org.docx4j.convert.in.Doc;
 import org.docx4j.fonts.IdentityPlusMapper;
 import org.docx4j.fonts.Mapper;
 import org.docx4j.fonts.PhysicalFont;
 import org.docx4j.fonts.PhysicalFonts;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
+
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
 
 
 public class DocToPDFConverter extends Converter {
@@ -37,7 +35,7 @@ public class DocToPDFConverter extends Converter {
         String fontFamily = "SimSun";
 
 //		URL simsunUrl = this.getClass().getResource("C:\\Windows\\fonts\\simfang.ttf"); //加载字体文件（解决linux环境下无中文字体问题）
-        PhysicalFonts.addPhysicalFont(fontFamily, new URL("file://C:\\Windows\\fonts\\STSONG.TTF"));
+//        PhysicalFonts.addPhysicalFont(fontFamily, new URL("file://C:\\Windows\\fonts\\STSONG.TTF"));
         PhysicalFont simsunFont = PhysicalFonts.get(fontFamily);
         fontMapper.put(fontFamily, simsunFont);
         wordMLPackage.setFontMapper(fontMapper, true);
@@ -60,7 +58,8 @@ public class DocToPDFConverter extends Converter {
         }));
 
 //		WordprocessingMLPackage mlPackage = Doc.convert(iStream);
-        WordprocessingMLPackage mlPackage = Doc.convert(iStream);
+        WordprocessingMLPackage mlPackage = null;
+//        WordprocessingMLPackage mlPackage = Doc.convert(iStream);
 
         System.setOut(originalStdout);
         return mlPackage;
