@@ -104,7 +104,7 @@ public class DocToHtmlConverter {
     private static boolean wordToHtml03(String sourceFile) {
         String filepath = FilenameUtils.getFullPath(sourceFile);
         final String fileName = FilenameUtils.getBaseName(sourceFile);
-        final String imgPath = filepath + "\\" + fileName + "\\";
+        final String imgPath = filepath + File.separator + fileName;
         String htmlFileName = fileName + ".html";
         String htmlFile = filepath + htmlFileName;
         InputStream input;
@@ -120,7 +120,7 @@ public class DocToHtmlConverter {
                         //图片目录不存在则创建
                         imgFile.mkdirs();
                     }
-                    File imgfile = new File(imgPath + suggestedName);
+                    File imgfile = new File(imgPath + File.separator + suggestedName);
                     try {
                         OutputStream os = new FileOutputStream(imgfile);
                         os.write(content);
@@ -130,7 +130,7 @@ public class DocToHtmlConverter {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    return fileName + "\\" + suggestedName;
+                    return fileName + File.separator + suggestedName;
                 }
             });
 
@@ -148,7 +148,10 @@ public class DocToHtmlConverter {
             serializer.setOutputProperty(OutputKeys.INDENT, "yes");
             serializer.setOutputProperty(OutputKeys.METHOD, "html");
             serializer.transform(domSource, streamResult);
+            //关闭流
             outStream.close();
+            input.close();
+            wordDocument.close();
         } catch (FileNotFoundException e1) {
             e1.printStackTrace();
             System.out.println("word03转html失败");
